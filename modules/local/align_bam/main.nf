@@ -65,7 +65,6 @@ process ALIGN_BAM {
             --output ${fgbio_zipper_bams_output} \\
             --tags-to-reverse Consensus \\
             --tags-to-revcomp Consensus \\
-            ${fgbio_args} \\
             ${extra_command};
 
     cat <<-END_VERSIONS > versions.yml
