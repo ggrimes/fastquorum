@@ -61,7 +61,7 @@ process ALIGN_BAM {
             --async-io=true \\
             ZipperBams \\
             --unmapped ${unmapped_bam} \\
-            --ref \${params.ref_fasta} \\
+            --ref ${params.ref_fasta} \\
             --output ${fgbio_zipper_bams_output} \\
             --tags-to-reverse Consensus \\
             --tags-to-revcomp Consensus \\
