@@ -55,7 +55,7 @@ process ALIGN_BAM {
     FASTA=`find -L ./ -name "*.amb" | sed 's/.amb//'`
 
     samtools fastq ${samtools_fastq_args} ${unmapped_bam} \\
-        | bwa mem ${bwa_args} -t $task.cpus -p -K 150000000 -Y  ${params.ref_fasta} - \\
+        | bwa mem ${bwa_args} -t $task.cpus -p -K 150000000 -Y /exports/igmm/eddie/BioinformaticsResources/igenomes/Homo_sapiens/GATK/GRCh38/Sequence/BWAIndex/Homo_sapiens_assembly38.fasta.64 - \\
         | java -Xmx${fgbio_mem_gb}g -XX:+AggressiveOpts -XX:+AggressiveHeap -jar /exports/igmm/eddie/ETR_BREAST_CANCER/fgbio-2.0.2.jar  \\
             --compression ${fgbio_zipper_bams_compression} \\
             --async-io=true \\
