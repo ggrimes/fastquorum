@@ -3,9 +3,9 @@ process ALIGN_BAM {
     label 'process_high'
 
     conda (params.enable_conda ? "bioconda::fgbio=2.0.2 bioconda::bwa=0.7.17 bioconda::samtools=1.16.1" : null)
-   \\  container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-   \\     'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
-    \\    'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
+   //  container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+   //    'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
+    //   'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
 
     input:
     tuple val(meta), path(unmapped_bam)
@@ -56,7 +56,7 @@ process ALIGN_BAM {
 
     samtools fastq ${samtools_fastq_args} ${unmapped_bam} \\
         | bwa mem ${bwa_args} -t $task.cpus -p -K 150000000 -Y \$FASTA - \\
-        | fgbio -Xmx${fgbio_mem_gb}g \\
+        | java -Xmx${fgbio_mem_gb}g -XX:+AggressiveOpts -XX:+AggressiveHeap -jar /exports/igmm/eddie/ETR_BREAST_CANCER/fgbio-2.0.2.jar  \\
             --compression ${fgbio_zipper_bams_compression} \\
             --async-io=true \\
             ZipperBams \\
