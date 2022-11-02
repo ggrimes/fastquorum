@@ -2,7 +2,7 @@ process ALIGN_BAM {
     tag "$meta.id"
     label 'process_high'
 
-    conda "bioconda::fgbio=2.0.2 bioconda::bwa=0.7.17 bioconda::samtools=1.16.1" 
+    conda "bioconda::fgbio bioconda::bwa=0.7.17 bioconda::samtools=1.16.1" 
    //  container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
    //    'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
     //   'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
