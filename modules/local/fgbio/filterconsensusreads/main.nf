@@ -3,7 +3,7 @@ process FGBIO_FILTERCONSENSUSREADS {
     label 'process_medium_mem'
 
   //  conda (params.enable_conda ? "bioconda::fgbio=2.0.2 bioconda::samtools=1.16.1" : null)
-    conda "bioconda::samtools=1.16.1" 
+   // conda "bioconda::samtools=1.16.1" 
    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
    //    'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
    //    'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
