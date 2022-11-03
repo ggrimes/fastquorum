@@ -3,9 +3,9 @@ process FGBIO_FILTERCONSENSUSREADS {
     label 'process_medium_mem'
 
     conda (params.enable_conda ? "bioconda::fgbio=2.0.2 bioconda::samtools=1.16.1" : null)
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
-        'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
+   // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+   //    'https://depot.galaxyproject.org/singularity/fgbio:2.0.2--hdfd78af_0' :
+   //    'quay.io/biocontainers/fgbio:2.0.2--hdfd78af_0' }"
 
     input:
     tuple val(meta), path(grouped_bam)
@@ -30,8 +30,7 @@ process FGBIO_FILTERCONSENSUSREADS {
     }
 
     """
-    fgbio \\
-        -Xmx${mem_gb}g \\
+    java -Xmx${fgbio_mem_gb}g -XX:+AggressiveOpts -XX:+AggressiveHeap -jar /exports/igmm/eddie/ETR_BREAST_CANCER/fgbio-2.0.2.jar \\
         --tmp-dir=. \\
         --compression=0 \\
         FilterConsensusReads \\
