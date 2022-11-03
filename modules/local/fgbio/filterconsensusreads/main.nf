@@ -31,7 +31,7 @@ process FGBIO_FILTERCONSENSUSREADS {
     }
 
     """
-    java -Xmx${fgbio_mem_gb}g -XX:+AggressiveOpts -XX:+AggressiveHeap -jar /exports/igmm/eddie/ETR_BREAST_CANCER/fgbio-2.0.2.jar \\
+    java -Xmx${mem_gb}g -XX:+AggressiveOpts -XX:+AggressiveHeap -jar /exports/igmm/eddie/ETR_BREAST_CANCER/fgbio-2.0.2.jar \\
         --tmp-dir=. \\
         --compression=0 \\
         FilterConsensusReads \\
